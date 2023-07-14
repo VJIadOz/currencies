@@ -1,0 +1,103 @@
+.history{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.714);
+}
+.history-wrapper{
+    position: absolute;
+    text-align: center;
+    right: 0;
+    margin-right: 0px;
+    height: 100%;
+    width: min(80%, 400px);
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: auto;
+}
+.history-wrapper > div:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+}
+ .history-wrapper > div:nth-child(2){
+  overflow-y: auto;
+  height: 85%;
+}
+.history-wrapper > div:nth-child(2)::-webkit-scrollbar {
+    width: 8px;
+  }
+  .history-wrapper > div:nth-child(2)::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .history-wrapper > div:nth-child(2)::-webkit-scrollbar-thumb {
+    background-color: rgb(230, 230, 230);
+    border-radius: 20px;
+  }
+  .history-item{
+    box-sizing: border-box;
+    height: 45px;
+    padding: 17px;
+    display: flex;
+    justify-content: space-between;
+  } 
+  .history-item-up{
+    box-shadow: -2px 2px 9px rgba(255, 0, 0, 0.222) inset;
+  }
+  .history-item-down{
+    box-shadow: -2px 2px 9px rgba(0, 128, 0, 0.278) inset;
+  }
+  
+  .buttons-wrapper{
+    height: 5%;
+    display: flex;
+    width: 100%;
+    border-top: 1px solid grey;
+  }
+  button{
+    border: none;
+    background-color: aliceblue;
+    cursor: pointer;
+  }
+  button:active{
+    box-shadow: 0px 0px 10px rgb(42, 42, 42) inset;
+  }
+  button:first-child{
+    flex: 1;
+    font-size: 2em;
+  }
+  button:first-child:hover{
+    background-color: rgb(208, 208, 208);
+  }
+
+  button:last-child{
+    flex: 7;
+    padding: 1em;
+    box-sizing: border-box;
+    border-left: 1px solid grey;
+  }
+  button:last-child:hover{
+    background-color: rgb(208, 208, 208);
+  }
+
+  .loading{
+    display: flex;
+    flex-direction: column;
+    height: 20em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loading div{
+    width: 150px;
+    height: auto;
+    aspect-ratio: 1/1;
+    background: url(../loading.svg) center center/ 100% 100% no-repeat;
+  }
