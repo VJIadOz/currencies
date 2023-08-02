@@ -8,7 +8,14 @@ export default class ValuteItem extends React.Component{
         super(props)
         this.state={
             history:[],
-            url: this.props.PreviousURL,
+            url: this.props.PreviousURL
+        }
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        if(this.props.exchangeRatesDate !== prevProps.exchangeRatesDate){
+            this.setState({history:[], url: this.props.PreviousURL})
+            // console.log("new date")
         }
     }
 

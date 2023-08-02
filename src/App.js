@@ -57,6 +57,7 @@ function App() {
               PreviousURL={exchangeRates.PreviousURL}
               infoValute={value}
               setHistory={setHistory}
+              exchangeRatesDate={exchangeRates.Date}
             />
           )
           :
