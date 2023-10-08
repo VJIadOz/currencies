@@ -1,35 +1,51 @@
 import './History.css'
-import getNormDate from '../functions/getNormDate';
+import getNormDate from '../functions/getNormDate'
 
-export default function History({dataFromValuteItem}){
+export default function History({
+    History, 
+    setVisible, 
+    activeValute, 
+    isLoading,
+    getMoreHistory
+}){
+    const HistoryOfValute = activeValute.code && History[activeValute.code].history
     return(
         <div className='history'>
             <div className='history-wrapper'>
-                <div>
-                    <h1>{dataFromValuteItem.valuteName} {dataFromValuteItem.valuteCharCode}</h1>
-                </div>
-                <div>
-                    {dataFromValuteItem.historyValute ?
-                        dataFromValuteItem.historyValute.map((value,index)=>
-                            <div key={index} className={`history-item ${value[2] ? "history-item-up" : "history-item-down"}`}>
-                                <span>{getNormDate(value[0])}</span>
-                                <span>{value[1]}</span>
-                            </div>
-                        )
+                {!isLoading ?
+                    <> 
+                        <div className='nameValute'>
+                            <h1>{activeValute.fullname+" "+activeValute.code}</h1>
+                        </div>
+                        <div className='list'>
+                            {HistoryOfValute.map((item)=>
+                                <div className={item.value.Previous < item.value.Value ? "history-item-up" : "history-item-down"}>
+                                    <span>{getNormDate(item.date)}</span>
+                                    <div>
+                                        {item.value.Previous < item.value.Value ?
+                                        <span style={{color: "red"}}>▲</span>
+                                        :
+                                        <span style={{color:"green"}}>▼</span>}
+                                        <span>{item.value.Value.toFixed(3)}</span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className='buttons-wrapper'>
+                            <button onClick={()=>{setVisible(false)}}>×</button>
+                            <button
+                                onClick={(e)=>getMoreHistory(e)}
+                                >Загрузить ещё</button>
+                        </div>
+                    </>
+                    
                     :
                     <div className="loading">
                         <div></div>
-                        <p>Загрузка</p>
-                    </div>
-                    }  
-                </div>
-                {dataFromValuteItem.historyValute && 
-                    <div className='buttons-wrapper'>
-                        <button onClick={()=>document.querySelector(".history").style.display = "none"}>×</button>
-                        <button onClick={()=>dataFromValuteItem.elem.fetchHistory()}>Загрузить ещё</button>
                     </div>
                 }
             </div>
         </div>
     )
 }
+
