@@ -4,7 +4,7 @@ import './ValuteItem.css'
 
 export default function ValuteItem(props){
     return(
-        <div className='currency'  onClick={(e)=>props.getHistory(e)}>
+        <div className='currency'  onClick={(e)=>props.getHistory(e, false)}>
             <div className='currency-code_wrapper'>
                 <span>{props.infoValute.Name}</span>
                 <span>{props.infoValute.CharCode}</span>

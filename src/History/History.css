@@ -38,7 +38,6 @@
 }
 .list::-webkit-scrollbar-thumb {
   background-color: rgb(230, 230, 230);
-  border-radius: 20px;
 }
 .list > div{
   box-sizing: border-box;
@@ -58,33 +57,56 @@
 .buttons-wrapper{
   display: flex;
   width: 100%;
-  border-top: 1px solid grey;
+  /* border-top: 1px solid grey; */
 }
 button{
   border: none;
-  background-color: aliceblue;
+  background-color: rgb(206, 226, 243);
   cursor: pointer;
 }
-button:active{
-  box-shadow: 0px 0px 10px rgb(42, 42, 42) inset;
-}
-button:first-child{
+
+.closeBtn{
   flex: 1;
-  font-size: 2em;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgb(206, 226, 243);
 }
-button:first-child:hover{
-  background-color: rgb(208, 208, 208);
+.closeBtn:hover{
+  box-shadow: 0px 0px 3px 0px rgb(80, 144, 151) inset;
+}
+.closeBtn span{
+  color: rgb(36, 102, 98);
+  transition: transform 0.5s;
+  font-size: 2rem;
+}
+.closeBtn:hover span{
+  transform: rotateZ(180deg);
+  
 }
 
+
+
 button:last-child{
-  flex: 7;
-  padding: 1em;
+  transition: all 0.3s;
+  background: linear-gradient(90deg, rgb(136, 197, 191)1%,transparent 100%) 500px/50% no-repeat rgb(206, 226, 243);
+  color: rgb(36, 102, 98);
+  flex: 6;
+  padding: 0.7em;
   box-sizing: border-box;
-  border-left: 1px solid grey;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 button:last-child:hover{
-  background-color: rgb(208, 208, 208);
+  background-position: 0% 0%;
+  letter-spacing: 3px;
 }
+
+
+
 
 .loading{
   display: flex;
@@ -99,5 +121,5 @@ button:last-child:hover{
   width: 150px;
   height: auto;
   aspect-ratio: 1/1;
-  background: url(../loading.svg) center center/ 100% 100% no-repeat;
+  background: url(./loading.svg) center center/ 100% 100% no-repeat;
 }

@@ -12,7 +12,7 @@ function App() {
     const [activeValute, setActiveValute] = useState({fullname:'', code: ''})
     const [isLoading, setIsLoading] = useState(false)
 
-	  const [nowCurrencies, setNowCurrencies] = useState({})  
+	const [nowCurrencies, setNowCurrencies] = useState({})  
     const [date, setDate] = useState('')
     const [history, setHistory] = useState({})
     const isData = Object.entries(nowCurrencies).length ? true : false
@@ -44,20 +44,27 @@ function App() {
         setActiveValute({fullname:'', code: ''})
     },[date])
 
-    function getHistory(e){
-        // console.log(history)
-        let nameValute = {
-            fullname: e.currentTarget.firstChild.firstChild.innerHTML,
-            code: e.currentTarget.firstChild.lastChild.innerHTML
+    function getHistory(e, moreHistory){
+        let url, hist, nameValute
+        if(moreHistory){
+            url = history[activeValute.code].prevUrl
+            setIsLoading(true)
+            hist = JSON.parse(JSON.stringify(history))
+            nameValute = Object.assign({}, activeValute)
+        }else{
+            nameValute = {
+                fullname: e.currentTarget.firstChild.firstChild.innerHTML,
+                code: e.currentTarget.firstChild.lastChild.innerHTML
+            }
+            setVisible(true)
+            setActiveValute(nameValute)
+            if(history[nameValute.code].history.length) return
+    
+            url = nowCurrencies.PreviousURL
+            setIsLoading(true)
+            hist = JSON.parse(JSON.stringify(history))
         }
-        setVisible(true)
-        setActiveValute(nameValute)
-        if(history[nameValute.code].history.length) return
 
-        let url = nowCurrencies.PreviousURL
-        setIsLoading(true)
-        let hist = JSON.parse(JSON.stringify(history))
-        
         let copyHistoryValute = []
         let i = 0
         let interval = setInterval(()=>{
@@ -81,35 +88,6 @@ function App() {
             })
         },300)   
           
-    }
-
-    function getMoreHistory(e){
-        let url = history[activeValute.code].prevUrl
-        setIsLoading(true)
-        let hist = JSON.parse(JSON.stringify(history))
-        
-        let copyHistoryValute = []
-        let i = 0
-        let interval = setInterval(()=>{
-            if(i===5){
-                clearInterval(interval)
-                hist[activeValute.code].prevUrl = url
-                hist[activeValute.code].history.push(...copyHistoryValute)
-                setHistory(hist)
-                setIsLoading(false)
-                console.log(hist)
-            }
-            fetch(url)
-            .then(respond=>respond.json())
-            .then((data)=>{
-                copyHistoryValute.push({
-                    date: data.Date,
-                    value: data.Valute[activeValute.code]
-                })
-                url = data.PreviousURL
-                i++
-            })
-        },300)     
     }
 
 	return (
@@ -153,7 +131,7 @@ function App() {
                     activeValute={activeValute}
                     isLoading={isLoading}
                     setIsLoading={setIsLoading}
-                    getMoreHistory={getMoreHistory}
+                    getHistory={getHistory}
                 />}
             </aside>
         </div>

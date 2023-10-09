@@ -46,6 +46,6 @@ main{
   width: 150px;
   height: auto;
   aspect-ratio: 1/1;
-  background: url(sad-face.svg) center center/ 100% 100% no-repeat;
+  background: url(./sad-face.svg) center center/ 100% 100% no-repeat;
 }
 

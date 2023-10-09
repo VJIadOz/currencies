@@ -6,7 +6,7 @@ export default function History({
     setVisible, 
     activeValute, 
     isLoading,
-    getMoreHistory
+    getHistory
 }){
     const HistoryOfValute = activeValute.code && History[activeValute.code].history
     return(
@@ -32,10 +32,10 @@ export default function History({
                             )}
                         </div>
                         <div className='buttons-wrapper'>
-                            <button onClick={()=>{setVisible(false)}}>×</button>
-                            <button
-                                onClick={(e)=>getMoreHistory(e)}
-                                >Загрузить ещё</button>
+                            <div className='closeBtn' onClick={()=>{setVisible(false)}}>
+                                <span>X</span>
+                            </div>
+                            <button onClick={(e)=>getHistory(e, true)}>Загрузить ещё</button>
                         </div>
                     </>
                     
